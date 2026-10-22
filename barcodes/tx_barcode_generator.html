@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Texas Driver's License Barcode Generator</title>
+    <script src="bcmath-min.js" type="text/javascript"></script>
+    <script src="pdf417-min.js" type="text/javascript"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+        .form-column { min-width: 0; }
+        .form-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: baseline; gap: 10px; margin-bottom: 10px; }
+        label { font-weight: bold; text-align: right; }
+        input, select { box-sizing: border-box; width: 100%; padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        #barcode { text-align: center; margin: 20px auto; }
+        button { display: inline-block; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; color: white; margin: 0 5px; }
+        button.btn-generate { background-color: #007bff; }
+        button.btn-generate:hover { background-color: #0056b3; }
+        button.btn-download { background-color: #28a745; }
+        button.btn-download:hover { background-color: #218838; }
+        .button-bar { text-align: center; margin-top: 20px; }
+        h1, h2 { text-align: center; }
+        @media (max-width: 650px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Texas Driver's License Generator</h1>
+    <hr/><br/>
+    <div id="barcode">[Barcode Will Load Here]</div>
+    <br/><hr/>
+    <h2>Please check spelling and ensure your information is correct!</h2>
+    <h2>If you do not understand a field, such as Driving Class or Restriction Code, you should leave it blank/default.</h2>
+    <br />
+    <div class="form-grid">
+        <div class="form-column">
+            <div class="form-row"><label for="DL">DL Number:</label><input type="text" id="DL" name="DL" value="38228902" maxlength="8"></div>
+            <div class="form-row"><label for="first">First Name:</label><input type="text" id="first" name="first" value="Kahlea"></div>
+            <div class="form-row"><label for="middle">Middle Name:</label><input type="text" id="middle" name="middle" value="Ashan"></div>
+            <div class="form-row"><label for="last">Last Name:</label><input type="text" id="last" name="last" value="Vassau"></div>
+            <div class="form-row"><label for="address">Address:</label><input type="text" id="address" name="address" value="901 wooded acres dr"></div>
+            <div class="form-row"><label for="city">City:</label><input type="text" id="city" name="city" value="Waco"></div>
+            <div class="form-row"><label for="zip">Full Zipcode:</label><input type="text" id="zip" name="zip" value="76710"></div>
+            <div class="form-row"><label for="class">Driving Class:</label><input type="text" id="class" name="class" value="C"></div>
+            <div class="form-row"><label for="RC">Restriction Codes:</label><input type="text" id="RC" name="RC" value="NONE"></div>
+            <div class="form-row"><label for="EC">Endorsement Codes:</label><input type="text" id="EC" name="EC" value="NONE"></div>
+            <div class="form-row"><label for="HIN">Height (In.):</label><input type="number" id="HIN" name="HIN" min="48" max="84" value="70"></div>
+            <div class="form-row"><label for="weight">Weight (lb.):</label><input type="number" id="weight" name="weight" min="50" max="500" value="171"></div>
+        </div>
+        <div class="form-column">
+            <div class="form-row"><label for="yearb">Year (Birth):</label><input type="number" id="yearb" name="yearb" min="1900" max="2026" value="1999"></div>
+            <div class="form-row"><label for="monthb">Month (Birth):</label><input type="number" id="monthb" name="monthb" min="1" max="12" value="07"></div>
+            <div class="form-row"><label for="dayb">Day (Birth):</label><input type="number" id="dayb" name="dayb" min="1" max="31" value="05"></div>
+            <div class="form-row"><label for="yeari">Year (Issued):</label><input type="number" id="yeari" name="yeari" min="2010" max="2030" value="2022"></div>
+            <div class="form-row"><label for="monthi">Month (Issued):</label><input type="number" id="monthi" name="monthi" min="1" max="12" value="12"></div>
+            <div class="form-row"><label for="dayi">Day (Issued):</label><input type="number" id="dayi" name="dayi" min="1" max="31" value="03"></div>
+            <div class="form-row"><label for="gender">Gender:</label><select id="gender" name="gender"><option value="1">Male</option><option value="2">Female</option></select></div>
+            <div class="form-row"><label for="race">Race:</label><select id="race" name="race"><option value="BK">Black</option><option value="WH">White</option><option value="H">Hispanic</option><option value="A">Asian</option></select></div>
+            <div class="form-row"><label for="organ">Organ Donor:</label><select id="organ" name="organ"><option value="1">Yes</option><option value="0">No</option></select></div>
+            <div class="form-row"><label for="eye">Eye Color:</label><select id="eye" name="eye"><option value="BRO">Brown</option><option value="BLU">Blue</option><option value="GRN">Green</option><option value="HAZ">Hazel</option><option value="BLK">Black</option></select></div>
+            <div class="form-row"><label for="hair">Hair Color:</label><select id="hair" name="hair"><option value="BLK">Black</option><option value="BRO">Brown</option><option value="RED">Red</option><option value="BLN">Blonde</option></select></div>
+        </div>
+    </div>
+    <br/>
+    <div class="button-bar">
+        <button type="button" class="btn-download" onclick="downloadPNG();">Download PNG</button>
+        <button type="button" class="btn-generate" onclick="go();">Generate</button>
+    </div>
+</body>
+<script type="text/javascript">
+    // Helper to format string fields: trims, converts to uppercase, replaces empty values with NONE, slices to max length
+    function fit(value, length) {
+        if (!value || String(value).trim() === "") {
+            return "NONE"; 
+        }
+        var str = String(value).toUpperCase().trim();
+        if (str.length > length) {
+            return str.substring(0, length);
+        }
+        return str;
+    }
+
+    // Date padder: Ensures single-digit months/days get a leading zero (e.g., "7" -> "07")
+    function pad2(value) {
+        if (!value) return "00";
+        return String(value).padStart(2, "0");
+    }
+
+    // Random number generators for audit/stock tracking numbers
+    function random13DigitNumber() {
+        let result = String(Math.floor(Math.random() * 9) + 1);
+        for (let i = 1; i < 13; i++) {
+            result += Math.floor(Math.random() * 10);
+        }
+        return result;
+    }
+
+    function random6DigitNumber() {
+        return String(Math.floor(Math.random() * 900000) + 100000);
+    }
+
+    function random4DigitNumber() {
+        return String(Math.floor(Math.random() * 9000) + 1000);
+    }
+
+    function downloadPNG() {
+        var canvas = document.querySelector("#barcode canvas");
+        if (!canvas) {
+            alert("Please generate a barcode first!");
+            return;
+        }
+        var link = document.createElement('a');
+        link.download = 'texas_dl_barcode.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    function go() {
+        // 1. Build MMDDYYYY dates
+        var bMonth = pad2(document.getElementsByName("monthb")[0].value);
+        var bDay = pad2(document.getElementsByName("dayb")[0].value);
+        var bYear = document.getElementsByName("yearb")[0].value;
+        var dob = bMonth + bDay + bYear; // DBB
+
+        var iMonth = pad2(document.getElementsByName("monthi")[0].value);
+        var iDay = pad2(document.getElementsByName("dayi")[0].value);
+        var iYear = document.getElementsByName("yeari")[0].value;
+        var issued = iMonth + iDay + iYear; // DBD
+
+        // Texas DLs typically expire on the cardholder's birthday 8 years after issuance
+        var eYear = (parseInt(iYear, 10) + 8).toString();
+        var expires = bMonth + bDay + eYear; // DBA
+
+        // 2. Extract options & inputs
+        var dClass = document.getElementById("class").value.trim().toUpperCase() || "C";
+        var organVal = document.getElementById("organ").value; // "1" or "0"
+        var heightInches = String(parseInt(document.getElementsByName("HIN")[0].value, 10) || 70).padStart(3, "0") + "in";
+        var weightPounds = String(parseInt(document.getElementsByName("weight")[0].value, 10) || 170).padStart(3, "0");
+
+        // 3. Construct DL Subfile (each field properly tagged and separated by newline)
+        var dlData = "DL" +
+            "DCA" + dClass + "\n" +
+            "DCB" + fit(document.getElementsByName("RC")[0].value, 10) + "\n" +
+            "DCD" + fit(document.getElementsByName("EC")[0].value, 5) + "\n" +
+            "DBA" + expires + "\n" +
+            "DCS" + fit(document.getElementsByName("last")[0].value, 24) + "\n" +
+            "DDEN\n" +
+            "DAC" + fit(document.getElementsByName("first")[0].value, 20) + "\n" +
+            "DDFN\n" +
+            "DAD" + fit(document.getElementsByName("middle")[0].value, 20) + "\n" +
+            "DDGN\n" +
+            "DBD" + issued + "\n" +
+            "DBB" + dob + "\n" +
+            "DBC" + fit(document.getElementsByName("gender")[0].value, 1) + "\n" +
+            "DAY" + fit(document.getElementsByName("eye")[0].value, 4) + "\n" +
+            "DAU" + heightInches + "\n" +
+            "DAG" + fit(document.getElementsByName("address")[0].value, 35) + "\n" +
+            "DAI" + fit(document.getElementsByName("city")[0].value, 20) + "\n" +
+            "DAJTX\n" +
+            "DAK" + fit(document.getElementsByName("zip")[0].value, 5) + random4DigitNumber() + "\n" +
+            "DAQ" + fit(document.getElementsByName("DL")[0].value, 8) + "\n" +
+            "DCF00629" + random13DigitNumber() + "\n" +
+            "DCGUSA\n" +
+            "DAZ" + fit(document.getElementsByName("hair")[0].value, 3) + "\n" +
+            "DCK10000" + random6DigitNumber() + "\n" +
+            "DCL" + fit(document.getElementsByName("race")[0].value, 2) + "\n" +
+            "DDAF\n" +
+            "DDB02232020\n" +
+            "DAW" + weightPounds + "\n" +
+            "DDK" + organVal + "\n";
+
+        // 4. Construct Texas Jurisdiction Subfile (ZT)
+        var ztData = "ZTZTA" + (organVal === "1" ? "Y" : "N") + "\n";
+
+        // 5. Calculate Byte Offsets and Lengths Dynamically
+        // Header prefix: @ + LF + RS + CR + "ANSI636015090002" = 21 bytes
+        // Each subfile descriptor: 2 letters + 4 digits offset + 4 digits length = 10 bytes
+        // 2 subfiles (DL and ZT) = 20 bytes -> Total header = 41 bytes
+        var headerLength = 41;
+        var dlOffset = headerLength;
+        var dlLen = dlData.length;
+        var ztOffset = dlOffset + dlLen;
+        var ztLen = ztData.length;
+
+        var header = "@\n\x1E\rANSI636015090002" +
+            "DL" + String(dlOffset).padStart(4, "0") + String(dlLen).padStart(4, "0") +
+            "ZT" + String(ztOffset).padStart(4, "0") + String(ztLen).padStart(4, "0");
+
+        var fullPayload = header + dlData + ztData;
+
+        // 6. Render PDF417 Barcode
+        document.getElementById("barcode").innerHTML = "";
+        PDF417.init(fullPayload, 3);
+        var barcode = PDF417.getBarcodeArray();
+
+        var bw = 4;
+        var bh = 3;
+        var canvas = document.createElement('canvas');
+        canvas.width = bw * barcode['num_cols'];
+        canvas.height = bh * barcode['num_rows'];
+        var ctx = canvas.getContext('2d');
+
+        var y = 0;
+        for (var r = 0; r < barcode['num_rows']; ++r) {
+            var x = 0;
+            for (var c = 0; c < barcode['num_cols']; ++c) {
+                if (barcode['bcode'][r][c] == 1) {
+                    ctx.fillRect(x, y, bw, bh);
+                }
+                x += bw;
+            }
+            y += bh;
+        }
+        document.getElementById('barcode').appendChild(canvas);
+    }
+</script>
+</html>
